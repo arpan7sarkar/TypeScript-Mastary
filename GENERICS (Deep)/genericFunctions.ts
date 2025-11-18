@@ -42,3 +42,12 @@ function firstElem<T>(arr: T[]): T | undefined {
 
 const arr2=firstElem<number>([1,2,5,8])
 console.log(arr2);
+
+// 5. Create a generic function that accepts two different types `combine<A, B>(a: A, b: B)` and returns a tuple.
+
+function combine<A,B>(a:A,b:B):[A,B]{
+  return [a,b];
+}
+const newTuple=combine<number,string>(69,"Arpan")
+console.log(newTuple);
+
