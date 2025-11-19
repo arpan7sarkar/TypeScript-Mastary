@@ -1,43 +1,174 @@
-# 🟦 **2. UTILITY TYPES (Partial, Required, Pick, Omit)**
-
-## **1️⃣ Why we need it**
-
-* Modify existing types without rewriting
-* Used heavily in React, form handling, APIs
-* Reduce code duplication
-* Make strict types flexible
+Here’s the **clean, beginner-friendly explanation** of the most important **Utility Types** in TypeScript:
+(Short + example-based)
 
 ---
 
-## **2️⃣ Code Examples**
+# 🚀 **What are Utility Types?**
 
-### **Partial<T>** → makes all properties optional
+Utility types are **built-in TypeScript helpers** that let you **modify existing types** without rewriting them.
+They make your code **cleaner, safer, and faster** to write.
 
-```ts
-interface User { name: string; age: number; }
-const u: Partial<User> = { name: "Arpan" };
-```
+---
 
-### **Required<T>** → makes all optional properties required
+# 🟦 **1. Partial<T>**
 
-```ts
-interface Config { url?: string; timeout?: number; }
-let c: Required<Config> = { url: "a", timeout: 3000 };
-```
+Makes **all properties optional**.
 
-### **Pick<T, Keys>**
+### 🔹 Why we use it
 
-```ts
-type UserBasic = Pick<User, "name">;
-```
+Useful when updating objects, patching forms, or sending partial data.
 
-### **Omit<T, Keys>**
+### 🔹 Example
 
 ```ts
-type WithoutAge = Omit<User, "age">;
+interface User {
+  name: string;
+  age: number;
+}
+
+const u: Partial<User> = {
+  name: "Arpan",  // age is optional now
+};
 ```
 
 ---
+
+# 🟦 **2. Required<T>**
+
+Makes **all properties mandatory** (opposite of Partial).
+
+### 🔹 Example
+
+```ts
+interface Config {
+  url?: string;
+  timeout?: number;
+}
+
+const c: Required<Config> = {
+  url: "api",
+  timeout: 3000,
+};
+```
+
+---
+
+# 🟦 **3. Readonly<T>**
+
+Makes all properties **immutable** (cannot change after set).
+
+### 🔹 Example
+
+```ts
+interface Car {
+  model: string;
+  year: number;
+}
+
+const c: Readonly<Car> = { model: "Tesla", year: 2024 };
+c.year = 2025; // ❌ Error
+```
+
+---
+
+# 🟦 **4. Pick<T, Keys>**
+
+Extract **only selected properties** from a type.
+
+### 🔹 Example
+
+```ts
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+type BasicUser = Pick<User, "name" | "email">;
+```
+
+---
+
+# 🟦 **5. Omit<T, Keys>**
+
+**Opposite of Pick** → removes selected properties.
+
+### 🔹 Example
+
+```ts
+type NoEmail = Omit<User, "email">;
+```
+
+---
+
+# 🟦 **6. Record<K, T>**
+
+Creates an object type with keys **K** and value type **T**.
+
+### 🔹 Example
+
+```ts
+type Scores = Record<string, number>;
+
+const s: Scores = {
+  math: 90,
+  english: 88,
+};
+```
+
+---
+
+# 🟦 **7. Exclude<T, U>**
+
+Removes types from a union.
+
+### 🔹 Example
+
+```ts
+type Status = "success" | "error" | "loading";
+type NoLoading = Exclude<Status, "loading">;
+```
+
+---
+
+# 🟦 **8. Extract<T, U>**
+
+Keeps only matching types.
+
+### 🔹 Example
+
+```ts
+type OnlyError = Extract<Status, "error">;
+```
+
+---
+
+# 🟦 **9. NonNullable<T>**
+
+Removes `null` and `undefined`.
+
+### 🔹 Example
+
+```ts
+type Clean = NonNullable<string | null | undefined>; // string
+```
+
+---
+
+# 🟩 **10. ReturnType<T>**
+
+Gets the return type of a function.
+
+### 🔹 Example
+
+```ts
+function greet() {
+  return { msg: "hello" };
+}
+
+type GreetType = ReturnType<typeof greet>;
+```
+
 
 ## **3️⃣ Practice Questions**
 

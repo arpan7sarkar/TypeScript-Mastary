@@ -30,3 +30,18 @@ let c: Required<Config> = { url: "a", timeout: 3000 };
 
 const d:Readonly<User>={name:"Arpan",age:18}
 // d.name="Accha" here we can't change any field because here we used Readonly
+
+
+//Make all fields required for a Settings type.
+
+interface Seetings{
+  profile:object,
+  theme:"light" | "dark",
+  password:string
+}
+const s:Required<Seetings>={profile:{
+  name:"Arpan",age:18
+},theme:"dark",password:"areBawa@12"}
+
+console.log(s);
+
